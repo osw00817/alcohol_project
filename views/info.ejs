@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Info Page</title>
+    <style>
+      /* 기본 스타일 */
+      body {
+        font-family: Arial, sans-serif;
+      }
+      .menu {
+        margin: 20px 0;
+      }
+      .menu ul {
+        list-style-type: none;
+        padding: 0;
+      }
+      .menu li {
+        margin-bottom: 10px;
+      }
+      .submenu {
+        margin-left: 20px;
+      }
+      .detail {
+        margin-top: 20px;
+        border-top: 1px solid #ccc;
+        padding-top: 20px;
+      }
+      button {
+        margin-left: 10px;
+        padding: 5px 10px;
+        cursor: pointer;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Welcome, user ID = <%= user.userId %></h1>
+
+    <!-- 디바이스 및 측정 날짜 목록 -->
+    <div class="menu">
+      <h2>Devices & Measurement Dates</h2>
+      <ul>
+        <% devices.forEach((device) => { %>
+          <li>
+            <strong><%= device.device_name %></strong> - <%= device.measurement_date %>
+            <button onclick="loadReports('<%= device.device_id %>', '<%= device.measurement_date %>')">View Reports</button>
+          </li>
+        <% }); %>
+      </ul>
+    </div>
+
+    <!-- 리포트 목록 -->
+    <div id="report-list" class="menu">
+      <h2>Reports</h2>
+      <!-- 리포트가 여기에 로드됩니다 -->
+    </div>
+
+    <!-- 리포트 상세 정보 -->
+    <div id="report-detail" class="detail">
+      <h2>Report Detail</h2>
+      <!-- 상세 정보가 여기에 로드됩니다 -->
+    </div>
+
+    <script>
+      // 특정 디바이스와 날짜로 리포트 목록 조회
+      async function loadReports(device_id, measurement_date) {
+        try {
+          const res = await fetch(`/info/reports/${device_id}/${measurement_date}`);
+          const reports = await res.json();
+          const reportListDiv = document.getElementById('report-list');
+          reportListDiv.innerHTML = '<h2>Reports</h2>';
+
+          if (!reports || reports.length === 0) {
+            reportListDiv.innerHTML += '<p>No reports found for this device and date.</p>';
+            return;
+          }
+
+          const ul = document.createElement('ul');
+          reports.forEach(report => {
+            const li = document.createElement('li');
+            li.innerHTML = `
+              <strong>Name:</strong> ${report.name} 
+              (Person ID: ${report.person_id}) 
+              <button onclick="loadReportDetail(${report.id})">View Detail</button>
+            `;
+            ul.appendChild(li);
+          });
+          reportListDiv.appendChild(ul);
+        } catch (error) {
+          console.error(error);
+          alert('Failed to load reports.');
+        }
+      }
+
+      // 리포트 상세 정보 불러오기
+      async function loadReportDetail(reportId) {
+        try {
+          const res = await fetch(`/info/reportDetail/${reportId}`);
+          const data = await res.json();
+          const reportDetailDiv = document.getElementById('report-detail');
+          reportDetailDiv.innerHTML = '<h2>Report Detail</h2>';
+
+          if (!data || data.error) {
+            reportDetailDiv.innerHTML += '<p>Failed to load report details.</p>';
+            return;
+          }
+
+          const { report, person, device, penalties } = data;
+
+          // 사람 정보 표시
+          reportDetailDiv.innerHTML += `
+            <h3>Person Information</h3>
+            <p><strong>Name:</strong> ${person.name}</p>
+            <p><strong>Person ID:</strong> ${person.person_id}</p>
+            <p><strong>Address:</strong> ${person.address}</p>
+            <p><strong>Phone Number:</strong> ${person.phone_number}</p>
+            <p><strong>Other Info:</strong> ${person.etc}</p>
+          `;
+
+          // 리포트 정보 표시
+          reportDetailDiv.innerHTML += `
+            <h3>Report Information</h3>
+            <p><strong>Alcohol Level:</strong> ${report.alcohol_level}</p> <!-- 수정된 부분 -->
+            <p><strong>Measurement Date:</strong> ${report.measurement_date}</p>
+            <p><strong>Device ID:</strong> ${device.device_id}</p>
+            <p><strong>Device Name:</strong> ${device.device_name}</p>
+            <p><strong>Location:</strong> ${device.location}</p>
+          `;
+
+          // 패널티 기록 표시
+          if (penalties.length > 0) {
+            reportDetailDiv.innerHTML += `<h3>Penalty Records</h3>`;
+            const ul = document.createElement('ul');
+            penalties.forEach(penalty => {
+              ul.innerHTML += `
+                <li>
+                  <strong>Date:</strong> ${penalty.penalty_date} 
+                  <br>
+                  <strong>Info:</strong> ${penalty.penalty_info} 
+                  <br>
+                  <strong>Reason:</strong> ${penalty.reason} 
+                  <br>
+                  <strong>Device ID:</strong> ${penalty.device_id}
+                </li>
+              `;
+            });
+            reportDetailDiv.appendChild(ul);
+          } else {
+            reportDetailDiv.innerHTML += `<p>No penalties found for this person.</p>`;
+          }
+        } catch (error) {
+          console.error(error);
+          alert('Failed to load report details.');
+        }
+      }
+    </scr
