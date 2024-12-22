@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>음주측정기 시스템</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #0f0f0f;
+            color: #e0e0e0;
+            display: flex;
+            height: 100vh;
+        }
+
+        .menu-bar {
+            width: 13%;
+            background-color: #11172a;
+            color: white;
+            padding: 10px;
+            box-shadow: 2px 0 5px rgba(0, 0, 0, 0.5);
+        }
+
+        .menu-bar h3 {
+            text-align: center;
+            margin-bottom: 15px;
+        }
+
+        .menu-bar ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .menu-bar ul li {
+            background-color: #1b2638;
+            margin: 10px 0;
+            padding: 8px;
+            border-radius: 5px;
+            cursor: pointer;
+            text-align: center;
+        }
+
+        .menu-bar ul li:hover {
+            background-color: #243249;
+        }
+
+        .main-container {
+            display: flex;
+            flex: 1;
+        }
+
+        .sub-menu {
+            width: 18%;
+            background-color: #141a26;
+            padding: 10px;
+            box-shadow: 2px 0 5px rgba(0, 0, 0, 0.5);
+        }
+
+        .sub-menu h3 {
+            text-align: center;
+            margin-bottom: 15px;
+        }
+
+        .sub-menu ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .sub-menu ul li {
+            background-color: #1d2a3b;
+            margin: 10px 0;
+            padding: 8px;
+            border-radius: 5px;
+            cursor: pointer;
+            text-align: center;
+        }
+
+        .sub-menu ul li:hover {
+            background-color: #243249;
+        }
+
+        .content-container {
+            flex: 1;
+            padding: 20px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            grid-gap: 20px;
+        }
+
+        .content-box {
+            background-color: #1a1f26;
+            padding: 15px;
+            border-radius: 5px;
+            color: #d0d0d0;
+        }
+
+        .content-box h4 {
+            margin-bottom: 10px;
+        }
+
+        .content-box p {
+            margin: 5px 0;
+        }
+
+        .content-box img {
+            width: 150px;
+            height: 150px;
+            object-fit: cover;
+            border-radius: 5px;
+            float: left;
+            margin-right: 15px;
+        }
+
+        .map-container {
+            grid-column: span 2;
+            background-color: #1a1f26;
+            padding: 20px;
+            border-radius: 5px;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .map {
+            width: 45%;
+            height: 200px;
+            background-color: #0f1722;
+            border-radius: 5px;
+        }
+
+        .map-info {
+            width: 50%;
+        }
+
+        .penalty-box {
+            background-color: #1a1f26;
+            padding: 15px;
+            border-radius: 5px;
+            color: #d0d0d0;
+        }
+
+    </style>
+</head>
+<body>
+
+<div class="menu-bar">
+    <h3>날짜별 - 기기별</h3>
+    <ul>
+        <li>기기1 - 2024-12-19</li>
+        <li>기기2 - 2024-12-18</li>
+        <li>기기3 - 2024-12-17</li>
+    </ul>
+</div>
+
+<div class="main-container">
+    <div class="sub-menu">
+        <h3>검사자 목록</h3>
+        <ul>
+            <li>홍길동</li>
+            <li>김영희</li>
+            <li>이철수</li>
+        </ul>
+    </div>
+
+    <div class="content-container">
+        <div class="content-box">
+            <h4>개인 정보</h4>
+            <img src="placeholder.jpg" alt="얼굴 사진">
+            <div>
+                <p>이름: 홍길동</p>
+                <p>주민등록번호: 123456-7890123</p>
+                <p>주소: 부산광역시 해운대구</p>
+            </div>
+        </div>
+        <div class="penalty-box">
+            <h4>과거 처벌 기록</h4>
+            <p>처벌 기록 1: 없음</p>
+            <p>처벌 기록 2: 2018-07-10 음주운전</p>
+        </div>
+        <div class="content-box map-container">
+            <div class="map-info">
+                <h4>음주 측정 결과 및 위치</h4>
+                <p>측정값: 0.03%</p>
+                <p>측정 기기: 기기1</p>
+                <p>일시: 2024-12-19 14:30</p>
+                <p>위치: 부산 해운대구</p>
+            </div>
+            <div class="map">지도 로드 중...</div>
+        </div>
+        
+    </div>
+</div>
+
+</body>
+</html>
