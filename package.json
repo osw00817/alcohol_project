@@ -4,18 +4,18 @@
     "description": "Project with Sequelize, Express, EJS, JWT",
     "main": "server.js",
     "scripts": {
-      "start": "node server.js",
-      "seed": "node test.js"
+        "start": "node server.js",
+        "seed": "node test.js"
     },
     "dependencies": {
-      "bcrypt": "^5.1.0",
-      "cookie-parser": "^1.4.6",
-      "dotenv": "^16.0.0",
-      "ejs": "^3.1.9",
-      "express": "^4.18.2",
-      "jsonwebtoken": "^9.0.0",
-      "mysql2": "^3.0.0",
-      "sequelize": "^6.31.0"
+        "bcrypt": "^5.1.0",
+        "cookie-parser": "^1.4.6",
+        "dotenv": "^16.0.0",
+        "ejs": "^3.1.9",
+        "express": "^4.18.2",
+        "jsonwebtoken": "^9.0.0",
+        "mysql2": "^3.0.0",
+        "nodemailer": "^6.9.16",
+        "sequelize": "^6.31.0"
     }
-  }
-  
+}

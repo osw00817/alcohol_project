@@ -31,9 +31,9 @@ const seed = async () => {
 
     // 사람 데이터 삽입
     const people = [
-      { person_id: 'P001', name: '김민준', address: '서울특별시 송파구 올림픽로 1234', phone_number: '010-1234-5678', etc: '기타 정보', resident_id: '900101-1234567' },
-      { person_id: 'P002', name: '이서윤', address: '경기도 성남시 분당구 수내로 567', phone_number: '010-9876-5432', etc: '기타 정보', resident_id: '910202-2345678' },
-      { person_id: 'P003', name: '박지훈', address: '부산광역시 사하구 다대포로 789', phone_number: '010-5678-1234', etc: '기타 정보', resident_id: '920303-3456789' },
+      { person_id: 'P001', name: '김민준', address: '서울특별시 송파구 올림픽로 1234', phone_number: 'osw00817@naver.com', etc: '기타 정보', resident_id: '900101-1234567' },
+      { person_id: 'P002', name: '이서윤', address: '경기도 성남시 분당구 수내로 567', phone_number: 'osw00817@naver.com', etc: '기타 정보', resident_id: '910202-2345678' },
+      { person_id: 'P003', name: '박지훈', address: '부산광역시 사하구 다대포로 789', phone_number: 'osw00817@naver.com', etc: '기타 정보', resident_id: '920303-3456789' },
     ];
 
     for (const personData of people) {
