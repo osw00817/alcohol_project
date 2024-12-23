@@ -185,23 +185,24 @@
 
     <div class="content-container">
         <div class="content-box">
-            <h4>개인 정보</h4>
+            <h3>개인 정보</h3>
             <img src="/imgs/mugshot.png" alt="얼굴 사진">
             <div id="person-info">
-                <p>이름: 홍길동</p>
-                <p>주민등록번호: 0505050505</p>
-                <p>주소: 부산대 웅비관관</p>
+                <p>이름: </p>
+                <p>주민등록번호: </p>
+                <p>주소: </p>
+                <p>이메일 주소: </p>
             </div>
         </div>
         <div class="penalty-box">
-            <h4>과거 처벌 기록</h4>
+            <h3>과거 처벌 기록</h3>
             <div id="penalty-info">
                 <!-- 과거 처벌 기록이 동적으로 로드됩니다 -->
             </div>
         </div>
         <div class="content-box map-container">
             <div class="map-info">
-                <h4>음주 측정 결과 및 위치</h4>
+                <h3>음주 측정 결과 및 위치</h3>
                 <div id="measurement-info">
                     <!-- 측정 결과 및 위치 정보가 동적으로 로드됩니다 -->
                 </div>
@@ -256,6 +257,7 @@
                     <p>이름: ${data.person.name}</p>
                     <p>주민등록번호: ${data.person.person_id}</p>
                     <p>주소: ${data.person.address}</p>
+                    <p>이메일 주소: ${data.person.phone_number}</p>
                 `;
 
                 document.getElementById('measurement-info').innerHTML = `
@@ -266,7 +268,7 @@
                 `;
 
                 const penalties = data.penalties.map(p => `
-                    <p>날짜: ${p.penalty_date}, 이유: ${p.reason}</p>
+                    <p>날짜: ${p.penalty_date}, ${p.penalty_info} : ${p.reason}</p>
                 `).join('');
 
                 document.getElementById('penalty-info').innerHTML = penalties || '<p>처벌 기록 없음</p>';

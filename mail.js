@@ -14,7 +14,7 @@ async function sendEmail() {
     });
 
     // 이메일 내용 설정
-    const mailOptions = {
+    const mailOptions    = {
         from: 'pnutest0721@gmail.com', // 발신자 이메일
         to: 'osw00817@naver.com', // 수신자 이메일
         subject: '[중요] 음주측정 결과 및 처벌 고지 안내', // 이메일 제목

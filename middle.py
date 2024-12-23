@@ -4,7 +4,7 @@ import json
 import time
 
 # 1. 블루투스 설정
-bluetooth_port = "COM10"  # Windows: "COM10", Linux: "/dev/ttyUSB0"
+bluetooth_port = "COM3"    # Windows: "COM10", Linux: "/dev/ttyUSB0"
 baud_rate = 9600
 post_url = "http://localhost:3000/api/report"  # 임시서버 URL
 
@@ -17,6 +17,7 @@ def read_bluetooth_data():
             while True:
                 try:
                     if ser.in_waiting > 0:
+                        print("통신성공")
                         # 블루투스에서 데이터 읽기
                         try:
                             data = ser.readline().decode("utf-8").strip()
@@ -35,14 +36,15 @@ def read_bluetooth_data():
                             continue
 
                         # 데이터베이스에 저장할 데이터 생성
+                        ## device_id, device_name, location, person_id, alcohol_level 
                         report_data = {
-                            "person_id": data_json.get("person_id", "Unknown"),
+                            "person_id": data_json.get("person_id", 'Unknown'),
                             "alcohol_level": data_json.get("alcohol_level", 0.0),
-                            "device_id": data_json.get("device_id", "Unknown"),
-                            "device_name": data_json.get("device_name", "Unknown"),
-                            "location": data_json.get("location", "Unknown")
+                            "device_id": data_json.get("device_id", 'Unknown'),
+                            "device_name": data_json.get("device_name", 'Unknown'),
+                            "location": data_json.get("location", 'Unknown')
                         }
-
+                        print(report_data);
                         # 서버로 전송
                         send_data_to_server(report_data)
                 except Exception as e:
